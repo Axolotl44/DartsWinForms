@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DartsDotNetFrameWork
 {
@@ -23,6 +22,10 @@ namespace DartsDotNetFrameWork
 
             CreatePlayerControls();
             CurrentPlayerEmphasize(0);
+
+            CurrentRoundLabel.Text = $"{currentSet}.Set {currentLeg}.Leg";
+
+            NewGamePanel.Hide();
         }
 
         PlayerControl[] playerControls;
@@ -32,14 +35,15 @@ namespace DartsDotNetFrameWork
 
             for (int i = 0; i < playerControls.Length; i++)
             {
-                playerControls[i] = new PlayerControl();
+                playerControls[i] = new PlayerControl()
+                {
+                    NameLabel = $"{game.Players[i].Name}",
+                    PointLabel = $"{game.Players[i].Point}",
 
-                playerControls[i].NameLabel = $"{game.Players[i].Name}";
-                playerControls[i].PointLabel = $"{game.Players[i].Point}";
-
-                //kezdéskor 0
-                playerControls[i].LegLabel = "0";
-                playerControls[i].SetLabel = "0";
+                    //kezdéskor 0
+                    LegLabel = "0",
+                    SetLabel = "0"
+                };
 
                 flowLayoutPanel1.Controls.Add(playerControls[i]);  
             }
@@ -104,7 +108,6 @@ namespace DartsDotNetFrameWork
         int setStarterPlayer = 0;
         bool playerWonLeg = false;
         bool playerWonSet = false;
-        bool playerWonGame = false;
         private int CurrentPlayerCalc()
         {
             //NEM TELJESEN JÓ. ÁTKELL NÉZNI A SET WITN
@@ -119,7 +122,7 @@ namespace DartsDotNetFrameWork
                 { setStarterPlayer = 0; }
 
                 currentPlayer = setStarterPlayer;
-                return currentPlayer;
+                return currentPlayer;          
             }
             else if (playerWonLeg) //ha player nyert leget, de nem nyert setet
             {
@@ -187,6 +190,9 @@ namespace DartsDotNetFrameWork
                 //pontok, checkout visszaállítása
                 PointReset();
                 CheckoutLabelReset();
+
+                //current round label számolás
+                currentLeg++;
             }
             if (game.Players[currentP].LegsWon == game.LegToSet) //Set win
             {
@@ -204,14 +210,25 @@ namespace DartsDotNetFrameWork
                 PointReset();
                 LegReset();
                 CheckoutLabelReset();
+
+                //current round label számolás
+                currentSet++;
+                currentLeg = 1;
             }
             if (game.Players[currentP].SetsWon == game.SetToWin) //GAME WIN
             {
-                MessageBox.Show($"{game.Players[currentP].Name} nyerte a gamet!");
-                playerWonGame = true;
-                //GAME RESET/GAME END method helye
+                Player gameWinner = game.Players[currentP];
+                MessageBox.Show($"{gameWinner.Name} nyerte a gamet!");
+
+                //GAME RESET/GAME END
+                ThrowPanel.Hide();
+                NewGamePanel.Show();
+                currentLeg = 1;
+                currentSet = 1;
+                return;
             }
 
+            CurrentRoundSetter();
         }
 
         private void PointReset() //nyert leg után
@@ -236,23 +253,34 @@ namespace DartsDotNetFrameWork
             }
         }
 
-        //GAME RESET TO BE IMPLEMENTED
-        //public void GameReset() //mindent resetel, jobb így
-        //{
-        //    legStarterPlayer = 0;
-        //    setStarterPlayer = 0;
-        //    playerWonLeg = false; //kör elején amúgy false lesz, de biztosabb ez
-        //    playerWonGame = false;
+        private void SetReset() //csak a seteket állítja vissza
+        {
+            for (int i = 0; i < game.NumOfPlayers; i++)
+            {
+                game.Players[i].SetsWon = 0;
 
-        //    for (int i = 0; i < numOfPlayers; i++)
-        //    {
-        //        players[i].Point = pointToWin;
-        //        players[i].LegsWon = 0;
-        //        players[i].SetsWon = 0;
-        //        players[i].NumOfThrows = 0;
-        //        players[i].PointsThrown.Clear();
-        //    }
-        //}
+                playerControls[i].SetLabel = "0";
+            }
+        }
+
+        private void GameReset() //mindent resetel, biztosabb így
+        {
+            legStarterPlayer = 0;
+            setStarterPlayer = 0;
+            playerWonLeg = false; 
+            playerWonSet = false;
+
+            PointReset();
+            LegReset();
+            SetReset();
+            CheckoutLabelReset();
+            
+            CurrentPlayerEmphasize(0);
+            CurrentRoundSetter();
+
+            ThrowPanel.Show();
+            NewGamePanel.Hide();       
+        }
 
         private void CheckoutLabelReset() //checkout label visszaállítás
         {
@@ -278,82 +306,31 @@ namespace DartsDotNetFrameWork
             }
         }
 
-        //A KÖR KIÍRÁSA, TO BE FIXED
         int currentLeg = 1;
         int currentSet = 1;
         private void CurrentRoundSetter()
         {
-            CurrentRound.Text = $"{currentSet}.Set {currentLeg}.Leg";
+            CurrentRoundLabel.Text = $"{currentSet}.Set {currentLeg}.Leg";
+        }
+
+        //game end gombok
+        private void button2_Click(object sender, EventArgs e) //IGEN ÚJ GAME
+        {
+            GameReset();
+        }
+
+        private void button3_Click(object sender, EventArgs e) //NEM, BEZÁR
+        {
+            Environment.Exit(0);
         }
 
 
-        //TO BE IMPLEMENTED
-        //private void NyertLeg(int i) //adhatnék playert is bemenetként de így most egyszerűbb volt
-        //{
-        //    //playerWonLeg = true;
+        //NOT YET IMPLEMENTED
+        //Átlag számolások, stats class
+        //Stats.Kiszallo(i, game);
+        //Stats.AvgLeg(i, this); 
 
-        //    MessageBox.Show($"{game.Players[i].Name} nyerte a leget!");
+        //SaveGame class
 
-        //    //NOT YET IMPLEMENTED
-        //    //Stats.Kiszallo(i, game); //kiszálló dartsok számát intézi, megkell adni melyik playerre, melyik gamere
-
-        //    game.Players[i].LegsWon += 1;
-
-        //    //Átlag számolások
-        //    //Stats.AvgLeg(i, this); NOT YET IMPLEMENTED
-
-        //    game.PointReset(); //Mindenki pontjának visszaállítása, mindig lefut kör végén, elég egyszer nullázni ezért
-        //}
-
-        //private void GameEnd(int winner)
-        //{
-        //    MessageBox.Show($"{game.Players[winner].Name} nyerte a játékot. GG!");
-
-        //    //Console.WriteLine("\nÚj játék? Y/N"); //Ugyanezekkel az emberekkel + szabályokkal egyelőre
-        //    //string newgame = Console.ReadLine();
-        //    //switch (newgame)
-        //    //{
-        //    //    case "Y":
-        //    //    case "y":
-        //    //        Console.Clear();
-        //    //        game.GameReset();
-        //    //        break;
-
-        //    //    case "N":
-        //    //    case "n":
-        //    //        Console.Clear();
-        //    //        //SaveGame();
-        //    //        Environment.Exit(0);
-        //    //        break;
-
-        //    //    default:
-        //    //        Console.WriteLine("Adjon meg valós lehetőséget");
-        //    //        GameEnd(winner);
-        //    //        break;
-        //    //}
-        //}
-
-        //private void SaveGame()
-        //{
-        //    Console.WriteLine("Menti a játékot? Y/N");
-        //    string savegame = Console.ReadLine();
-
-        //    switch (savegame)
-        //    {
-        //        case "Y":
-        //        case "y":
-        //            //FileHandler.SaveGame(this, "gameData"); NOT YET IMPLEMENTED
-        //            break;
-
-        //        case "N":
-        //        case "n":
-        //            break;
-
-        //        default:
-        //            Console.WriteLine("Adjon meg valós lehetőséget");
-        //            SaveGame();
-        //            break;
-        //    }
-        //}
     }
 }
