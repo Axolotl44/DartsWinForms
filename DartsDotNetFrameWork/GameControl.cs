@@ -223,8 +223,6 @@ namespace DartsDotNetFrameWork
                 //GAME RESET/GAME END
                 ThrowPanel.Hide();
                 NewGamePanel.Show();
-                currentLeg = 1;
-                currentSet = 1;
                 return;
             }
 
@@ -265,6 +263,7 @@ namespace DartsDotNetFrameWork
 
         private void GameReset() //mindent resetel, biztosabb így
         {
+            currentPlayer = 0;
             legStarterPlayer = 0;
             setStarterPlayer = 0;
             playerWonLeg = false; 
@@ -276,6 +275,8 @@ namespace DartsDotNetFrameWork
             CheckoutLabelReset();
             
             CurrentPlayerEmphasize(0);
+            currentLeg = 1;
+            currentSet = 1;
             CurrentRoundSetter();
 
             ThrowPanel.Show();
