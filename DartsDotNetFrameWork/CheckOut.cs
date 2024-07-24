@@ -8,29 +8,27 @@ namespace DartsDotNetFrameWork
 {
     internal static class CheckOut
     {
-        //169, 168, 166, 165, 163, 162, 159, (1) nem lehet kiszállni
-        public static string Checkout(int point) //csak 170 alatt hívjuk meg
+        //Csak 170 és alatta lehet kiszállni 3-ból; 169, 168, 166, 165, 163, 162, 159, (1) nem lehet kiszállni
+        public static string Checkout(int point)
         {
-            if (point <= 60) //2-60 tartomány, 40 alatt csak páros; nemkell továbbrasem else hogyha előtte return van de jóaz
+            if (point <= 60) //2-60 tartomány, 40 alatt csak páros
             {
                 if (point <= 60 && point >= 53) //53-60 közt
                 {
                     return $"{point - 40} D20";
                 }
-                else if (point <= 52 && point >= 41) //41-52 közt
+                if (point <= 52 && point >= 41) //41-52 közt
                 {
                     return $"{point - 32} D16";
                 }
-                else if(point <= 40 && IsEven(point)) //40 alatt páros
+                if (point <= 40 && IsEven(point)) //40 alatt páros
                 {
                     return $"D{point / 2}";
                 }
-                return checkouts[point];
+                return checkouts[point]; //40 alatt páratlan
             }
-            else
-            {
-                return checkouts[point];
-            }
+
+            return checkouts[point]; //60 fölött
         }
 
         private static bool IsEven(int point)

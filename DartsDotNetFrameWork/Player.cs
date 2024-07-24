@@ -16,38 +16,38 @@ namespace DartsDotNetFrameWork
         private List<int> pointsThrown;
 
         public string Name 
-        { 
-            get => name; //nem szeretem ezt a fajta írásmódot, de tanultuk, úgyhogy mintának itt így lesz
+        {
+            get { return name; }
         } 
         public int Point
         {
-            get => point;
-            set => point = value;
+            get { return point; }
+            set { point = value; }
         }
         public int LegsWon
         {
-            get => legsWon;
-            set => legsWon = value;
+            get { return legsWon; }
+            set { legsWon = value; }
         }
         public int SetsWon
         {
-            get => setsWon;
-            set => setsWon = value;
+            get { return setsWon; }
+            set { setsWon = value; }
         }
         public int NumOfThrows
         {
-            get => numOfThrows;
-            set => numOfThrows = value;
+            get { return numOfThrows; }
+            set { numOfThrows = value; }
         }
         public List<int> PointsThrown
         {
-            get => pointsThrown;
+            get { return pointsThrown; }
         }
 
         public Player(string name, Game g)
         {
             this.name = name;
-            point = g.PointToWin;
+            point = g.PointsToLeg;
             legsWon = 0;
             setsWon = 0;
             numOfThrows = 0;
@@ -64,24 +64,6 @@ namespace DartsDotNetFrameWork
         //    numOfThrows = 0;
         //    pointsThrown = new List<int>();
         //}
-
-
-        //public void Thorw(int pointThrown)
-        //{
-        //    point -= pointThrown;
-        //    pointsThrown.Add(pointThrown); //egybe 3 dobás pontja
-
-        //    numOfThrows += 3;
-
-        //    //Console.WriteLine($"Maradt: {point}");
-        //    //if (point <= 170 && point > 0)
-        //    //{
-        //        //Console.WriteLine("Kiszállás:");
-        //        //CheckPoint.Checkout(point); NOT YET IMPLEMENTED
-        //    //}
-        //}
-
-
 
     }
 }

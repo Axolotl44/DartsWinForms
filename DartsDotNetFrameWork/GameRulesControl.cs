@@ -34,10 +34,10 @@ namespace DartsDotNetFrameWork
             if (int.TryParse(textBox1.Text, out leg) && int.TryParse(textBox2.Text, out set) && int.TryParse(textBox3.Text, out numP))
             {
                 gameType = int.Parse(comboBox1.Text);
-                PlayersStartControl teszt = new PlayersStartControl(gameType, leg, set, numP);
-                MainControl.ShowControl(teszt, GameStartContent);
+                PlayersStartControl playersStartControl = new PlayersStartControl(gameType, leg, set, numP);
+                MainControl.ShowControl(playersStartControl, GameRulesContent);
             }
-            //mindenhol van érték beírva, de nem szám
+            //mindenhol van érték beírva, de van ami nem szám
             else
             {
                 MessageBox.Show("Valós adatot adj meg");

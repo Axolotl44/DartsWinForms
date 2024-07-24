@@ -12,7 +12,7 @@ namespace DartsDotNetFrameWork
 {
     public partial class PlayersStartControl : UserControl
     {
-        private Game game; //Itt hozza létre először a game változót
+        private Game game; //első példány
         private int counter = 1;
         public PlayersStartControl(int gameType, int leg, int set, int numOfPlayers)
         {
@@ -40,7 +40,7 @@ namespace DartsDotNetFrameWork
                 tmp = new Player(playerNameInput.Text, game);
                 game.Players.Add(tmp);
 
-                playersListBox.Items.Add(tmp.Name);
+                playersListBox.Items.Add($"{counter - 1}. {tmp.Name}");
                 playerNameInput.Clear();
             }
             else if(counter == game.NumOfPlayers + 1)
@@ -48,7 +48,7 @@ namespace DartsDotNetFrameWork
                 tmp = new Player(playerNameInput.Text, game);
                 game.Players.Add(tmp);
 
-                playersListBox.Items.Add(tmp.Name);
+                playersListBox.Items.Add($"{counter - 1}. {tmp.Name}");
                 playerNameInput.Clear();
 
                 label5.Hide();
@@ -56,7 +56,7 @@ namespace DartsDotNetFrameWork
             }
         }
 
-        //Maga a játék felület betöltése; csak minden adat helyes megadása után jelenik meg
+        //Maga a játék felület betöltése; csak minden adat helyes megadása után jelenik meg a gomb
         //button3 = gameStartButton, később ha érdekel átnevezni mindenhol
         private void button3_Click(object sender, EventArgs e)
         {

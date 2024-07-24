@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.CurrentRound = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -55,16 +55,16 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(615, 480);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
-            // label2
+            // CurrentRound
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(54, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 20);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "1.Set, 1.Leg";
+            this.CurrentRound.AutoSize = true;
+            this.CurrentRound.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.CurrentRound.ForeColor = System.Drawing.Color.Silver;
+            this.CurrentRound.Location = new System.Drawing.Point(54, 83);
+            this.CurrentRound.Name = "CurrentRound";
+            this.CurrentRound.Size = new System.Drawing.Size(95, 20);
+            this.CurrentRound.TabIndex = 2;
+            this.CurrentRound.Text = "1.Set, 1.Leg";
             // 
             // textBox1
             // 
@@ -102,7 +102,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.CurrentRound);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label1);
             this.Name = "GameControl";
@@ -116,7 +116,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label CurrentRound;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;

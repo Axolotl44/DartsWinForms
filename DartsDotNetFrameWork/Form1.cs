@@ -19,10 +19,9 @@ namespace DartsDotNetFrameWork
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Betölti a gameStart usercontrolt
-            GameRulesControl gameStartControl = new GameRulesControl();
-            MainControl.ShowControl(gameStartControl, MainContent);
-
+            //Betölti a gameRules usercontrolt
+            GameRulesControl gameRulesControl = new GameRulesControl();
+            MainControl.ShowControl(gameRulesControl, MainContent);
         }
 
         private void button2_Click(object sender, EventArgs e)

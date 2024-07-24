@@ -18,29 +18,32 @@ namespace DartsDotNetFrameWork
         public GameControl(Game game)
         {
             InitializeComponent();
+
             this.game = game;
+
             CreatePlayerControls();
             CurrentPlayerEmphasize(0);
         }
 
-        PlayerControl[] playerControl;
+        PlayerControl[] playerControls;
         private void CreatePlayerControls()
         {
-            playerControl = new PlayerControl[game.NumOfPlayers];
+            playerControls = new PlayerControl[game.NumOfPlayers];
 
-            for (int i = 0; i < playerControl.Length; i++)
+            for (int i = 0; i < playerControls.Length; i++)
             {
-                playerControl[i] = new PlayerControl();
-                playerControl[i].NameP = $"{game.Players[i].Name}";
-                playerControl[i].PointP = $"{game.Players[i].Point}";
+                playerControls[i] = new PlayerControl();
+
+                playerControls[i].NameLabel = $"{game.Players[i].Name}";
+                playerControls[i].PointLabel = $"{game.Players[i].Point}";
 
                 //kezdéskor 0
-                playerControl[i].LegP = $"{game.Players[i].LegsWon}";
-                playerControl[i].SetP = $"{game.Players[i].SetsWon}";
+                playerControls[i].LegLabel = "0";
+                playerControls[i].SetLabel = "0";
 
-                flowLayoutPanel1.Controls.Add(playerControl[i]);  
+                flowLayoutPanel1.Controls.Add(playerControls[i]);  
             }
-            //először az első a kezdő player, őt kiemeljük
+            //első játékos kezd, őt kiemeljük
             CurrentPlayerEmphasize(0);
         }
 
@@ -63,76 +66,74 @@ namespace DartsDotNetFrameWork
         {
             if (textBox1.Text == "") //van-e érték beírva check
             {
-                textBox1.Clear();
                 MessageBox.Show("Adj meg értéket");
                 return;
             }
             if (int.TryParse(textBox1.Text, out dobottSzam)) //szám-e check
             {
-                if (dobottSzam > 180 || dobottSzam < 0) //ha nagyobbat dobna mint 180
+                if (dobottSzam > 180 || dobottSzam < 0) //valós dobás check
                 {
                     MessageBox.Show("Cheater, dobj újra");
                     textBox1.Clear();
                     return;
                 }
-                if (dobottSzam > game.Players[currentPlayer].Point) //Ha nagyobbat dobna mint amennyi pontja van
+                if (dobottSzam > game.Players[currentPlayer].Point) //ha nagyobbat dobna mint amennyi pontja van
                 {
                     MessageBox.Show("Nagyobbat dobtál mint amennyi pontod volt");
                     textBox1.Clear();
                     return;
                 }
-                //Ha valós értéket dobott be, akkor számoljuk hogy ki a soros, amúgy nem. és az dob ezután
+
                 textBox1.Clear();
-               
+
+                //valós dobott érték után dob a jelenlegi játékos
                 ThrowExtra(dobottSzam, currentPlayer);
-                //miután dobtunk, újraszámoljuk a következő playert és kiemeljük
+
+                //miután dobott újraszámoljuk a soron következőt és kiemeljük
                 currentPlayer = CurrentPlayerCalc();
                 CurrentPlayerEmphasize(currentPlayer);
             }
             else //van érték beírva, de nem szám
             {
-                textBox1.Clear();
                 MessageBox.Show("Valós értéket adj meg");
+                textBox1.Clear();
             }
         }
 
-        
-        int legStarterPlayerTESZT = 0;
-        int setStarterPlayerTESZT = 0;
-        private int currentLegTESZT = 1;
-        private int currentSetTESZT = 1;
-        bool playerWonLegTESZT = false;
-        bool playerWonSetTESZT = false;
-        bool playerWonGameTESZT = false;
+        int legStarterPlayer = 0;
+        int setStarterPlayer = 0;
+        bool playerWonLeg = false;
+        bool playerWonSet = false;
+        bool playerWonGame = false;
         private int CurrentPlayerCalc()
         {
-            //NE BASZOGTASD JÓ
-            if (playerWonSetTESZT) //fordított sorrendben először a set kezdőt kell megnézni
+            //NEM TELJESEN JÓ. ÁTKELL NÉZNI A SET WITN
+            if (playerWonSet) //fordított sorrendben először a set kezdőt kell megnézni
             {
-                playerWonSetTESZT = false;
-                playerWonLegTESZT = false;
+                playerWonSet = false;
+                playerWonLeg = false;
 
-                if (setStarterPlayerTESZT < game.NumOfPlayers - 1)
-                { setStarterPlayerTESZT++; }
+                if (setStarterPlayer < game.NumOfPlayers - 1)
+                { setStarterPlayer++; }
                 else
-                { setStarterPlayerTESZT = 0; }
+                { setStarterPlayer = 0; }
 
-                currentPlayer = setStarterPlayerTESZT;
+                currentPlayer = setStarterPlayer;
                 return currentPlayer;
             }
-            else if (playerWonLegTESZT) //ha player nyert leget, de nem nyert setet
+            else if (playerWonLeg) //ha player nyert leget, de nem nyert setet
             {
-                playerWonLegTESZT = false;
+                playerWonLeg = false;
 
-                if (legStarterPlayerTESZT < game.NumOfPlayers - 1)
-                { legStarterPlayerTESZT++; }
+                if (legStarterPlayer < game.NumOfPlayers - 1)
+                { legStarterPlayer++; }
                 else
-                { legStarterPlayerTESZT = 0; }
+                { legStarterPlayer = 0; }
 
-                currentPlayer = legStarterPlayerTESZT;
+                currentPlayer = legStarterPlayer;
                 return currentPlayer;
             }
-            else //Ha player még nem nyert leget, sem szetet
+            else //ha player még nem nyert leget, sem szetet
             {
                 if (currentPlayer < game.NumOfPlayers - 1)
                 { currentPlayer++; }
@@ -143,59 +144,45 @@ namespace DartsDotNetFrameWork
             } 
         }
 
-        private void ThrowExtra(int pointThrown, int currentP) //enter után hívódik, bementként megadott számmal, current playerrel
+        private void ThrowExtra(int pointThrown, int currentP) //valós megadott dobott számra, adott jelenlegi playerre
         {
             game.Players[currentP].Point -= pointThrown;
             game.Players[currentP].PointsThrown.Add(pointThrown); //egybe 3 dobás pontja
             game.Players[currentP].NumOfThrows += 3;
 
-            playerControl[currentP].PointP = $"{game.Players[currentPlayer].Point}";
+            playerControls[currentP].PointLabel = $"{game.Players[currentPlayer].Point}";
 
-            //Checkout lehetőség kiírás
+            //ha lehet, checkout lehetőség kiírás
             if (game.Players[currentP].Point <= 170)
             {
                 try
                 {
-                    playerControl[currentP].OutP = CheckOut.Checkout(game.Players[currentP].Point);
+                    playerControls[currentP].CheckoutLabel = CheckOut.Checkout(game.Players[currentP].Point);
                 }
                 catch (KeyNotFoundException)
                 {
                     MessageBox.Show("elkúrtam a kiszállókat");
                     return;
                 }
-                playerControl[currentP].CheckOutPossible();
+                playerControls[currentP].CheckOutPossible(); //megjeleníti a checkoutot
             }
             
-            CheckAll(currentP); //előbb mindent is ellenőrzünk
-        }
-
-        private void CurrentPlayerEmphasize(int currentP)
-        {
-            playerControl[currentP].SetCurrentPlayer();
-            //kell még egy scroll to element
-
-            for (int c = 0; c < game.NumOfPlayers; c++)
-            {
-                if (c != currentP)
-                {
-                    playerControl[c].NotCurrentPlayer();
-                }   
-            }
+            CheckAll(currentP); //dobás leszámolás után ellenőrzi a leget, setet, wint
         }
 
         private void CheckAll(int currentP)
         {
-            if (game.Players[currentP].Point <= 0) //Leg win
+            if (game.Players[currentP].Point == 0) //Leg win
             {
                 //üzenet
                 MessageBox.Show($"{game.Players[currentP].Name} nyerte a leget!");
 
                 //számolás+logika
                 game.Players[currentP].LegsWon++;
-                playerWonLegTESZT = true;
+                playerWonLeg = true;
 
                 //controlra való kiírás
-                playerControl[currentP].LegP = $"{game.Players[currentP].LegsWon}";
+                playerControls[currentP].LegLabel = $"{game.Players[currentP].LegsWon}";
 
                 //pontok, checkout visszaállítása
                 PointReset();
@@ -208,10 +195,10 @@ namespace DartsDotNetFrameWork
 
                 //számolás+logika
                 game.Players[currentP].SetsWon++;
-                playerWonSetTESZT = true;
+                playerWonSet = true;
 
                 //controlra való kiírás
-                playerControl[currentP].SetP = $"{game.Players[currentP].SetsWon}";
+                playerControls[currentP].SetLabel = $"{game.Players[currentP].SetsWon}";
 
                 //pontok, checkout visszaállítása
                 PointReset();
@@ -221,7 +208,8 @@ namespace DartsDotNetFrameWork
             if (game.Players[currentP].SetsWon == game.SetToWin) //GAME WIN
             {
                 MessageBox.Show($"{game.Players[currentP].Name} nyerte a gamet!");
-                playerWonGameTESZT = true;
+                playerWonGame = true;
+                //GAME RESET/GAME END method helye
             }
 
         }
@@ -230,11 +218,11 @@ namespace DartsDotNetFrameWork
         {
             for (int i = 0; i < game.NumOfPlayers; i++)
             {
-                game.Players[i].Point = game.PointToWin;
+                game.Players[i].Point = game.PointsToLeg;
                 game.Players[i].PointsThrown.Clear();
                 game.Players[i].NumOfThrows = 0;
 
-                playerControl[i].PointP = $"{game.PointToWin}";
+                playerControls[i].PointLabel = $"{game.PointsToLeg}";
             }
         }
 
@@ -244,20 +232,62 @@ namespace DartsDotNetFrameWork
             {
                 game.Players[i].LegsWon = 0;
 
-                playerControl[i].LegP = "0";
+                playerControls[i].LegLabel = "0";
             }
         }
 
-        private void CheckoutLabelReset()
+        //GAME RESET TO BE IMPLEMENTED
+        //public void GameReset() //mindent resetel, jobb így
+        //{
+        //    legStarterPlayer = 0;
+        //    setStarterPlayer = 0;
+        //    playerWonLeg = false; //kör elején amúgy false lesz, de biztosabb ez
+        //    playerWonGame = false;
+
+        //    for (int i = 0; i < numOfPlayers; i++)
+        //    {
+        //        players[i].Point = pointToWin;
+        //        players[i].LegsWon = 0;
+        //        players[i].SetsWon = 0;
+        //        players[i].NumOfThrows = 0;
+        //        players[i].PointsThrown.Clear();
+        //    }
+        //}
+
+        private void CheckoutLabelReset() //checkout label visszaállítás
         {
             for (int i = 0; i < game.NumOfPlayers; i++)
             {
-                playerControl[i].CheckOutNotPossible();
+                playerControls[i].CheckOutNotPossible();
             }
         }
 
 
-        //UNUSED SHITS... YET
+        private void CurrentPlayerEmphasize(int currentP)
+        {
+            playerControls[currentP].SetCurrentPlayer(); //current kiemelés
+            //FIX NEEDED, hogy középre scrollolja
+            flowLayoutPanel1.ScrollControlIntoView(playerControls[currentP]);
+
+            for (int c = 0; c < game.NumOfPlayers; c++)
+            {
+                if (c != currentP)
+                {
+                    playerControls[c].NotCurrentPlayer(); //nem current kiemelés eltüntetés
+                }
+            }
+        }
+
+        //A KÖR KIÍRÁSA, TO BE FIXED
+        int currentLeg = 1;
+        int currentSet = 1;
+        private void CurrentRoundSetter()
+        {
+            CurrentRound.Text = $"{currentSet}.Set {currentLeg}.Leg";
+        }
+
+
+        //TO BE IMPLEMENTED
         //private void NyertLeg(int i) //adhatnék playert is bemenetként de így most egyszerűbb volt
         //{
         //    //playerWonLeg = true;
@@ -301,6 +331,29 @@ namespace DartsDotNetFrameWork
         //    //        GameEnd(winner);
         //    //        break;
         //    //}
+        //}
+
+        //private void SaveGame()
+        //{
+        //    Console.WriteLine("Menti a játékot? Y/N");
+        //    string savegame = Console.ReadLine();
+
+        //    switch (savegame)
+        //    {
+        //        case "Y":
+        //        case "y":
+        //            //FileHandler.SaveGame(this, "gameData"); NOT YET IMPLEMENTED
+        //            break;
+
+        //        case "N":
+        //        case "n":
+        //            break;
+
+        //        default:
+        //            Console.WriteLine("Adjon meg valós lehetőséget");
+        //            SaveGame();
+        //            break;
+        //    }
         //}
     }
 }

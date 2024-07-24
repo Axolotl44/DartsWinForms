@@ -39,8 +39,10 @@
             this.gameStartButton = new System.Windows.Forms.Button();
             this.MagaAGame = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.MagaAGame.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -92,7 +94,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label5.ForeColor = System.Drawing.Color.Silver;
-            this.label5.Location = new System.Drawing.Point(270, 111);
+            this.label5.Location = new System.Drawing.Point(21, 17);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 25);
             this.label5.TabIndex = 4;
@@ -100,14 +102,14 @@
             // 
             // playerNameInput
             // 
-            this.playerNameInput.Location = new System.Drawing.Point(275, 150);
+            this.playerNameInput.Location = new System.Drawing.Point(26, 45);
             this.playerNameInput.Name = "playerNameInput";
             this.playerNameInput.Size = new System.Drawing.Size(172, 20);
             this.playerNameInput.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(318, 192);
+            this.button1.Location = new System.Drawing.Point(68, 91);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 31);
             this.button1.TabIndex = 6;
@@ -120,14 +122,14 @@
             this.playersListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.playersListBox.FormattingEnabled = true;
             this.playersListBox.ItemHeight = 20;
-            this.playersListBox.Location = new System.Drawing.Point(483, 41);
+            this.playersListBox.Location = new System.Drawing.Point(562, 132);
             this.playersListBox.Name = "playersListBox";
             this.playersListBox.Size = new System.Drawing.Size(155, 224);
             this.playersListBox.TabIndex = 7;
             // 
             // gameStartButton
             // 
-            this.gameStartButton.Location = new System.Drawing.Point(275, 256);
+            this.gameStartButton.Location = new System.Drawing.Point(26, 148);
             this.gameStartButton.Name = "gameStartButton";
             this.gameStartButton.Size = new System.Drawing.Size(172, 55);
             this.gameStartButton.TabIndex = 9;
@@ -137,12 +139,9 @@
             // 
             // MagaAGame
             // 
+            this.MagaAGame.Controls.Add(this.panel2);
             this.MagaAGame.Controls.Add(this.panel1);
             this.MagaAGame.Controls.Add(this.playersListBox);
-            this.MagaAGame.Controls.Add(this.gameStartButton);
-            this.MagaAGame.Controls.Add(this.button1);
-            this.MagaAGame.Controls.Add(this.playerNameInput);
-            this.MagaAGame.Controls.Add(this.label5);
             this.MagaAGame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MagaAGame.Location = new System.Drawing.Point(0, 0);
             this.MagaAGame.Name = "MagaAGame";
@@ -155,10 +154,21 @@
             this.panel1.Controls.Add(this.gameTypeLabel);
             this.panel1.Controls.Add(this.legLabel);
             this.panel1.Controls.Add(this.setLabel);
-            this.panel1.Location = new System.Drawing.Point(17, 41);
+            this.panel1.Location = new System.Drawing.Point(56, 132);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(222, 224);
             this.panel1.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.playerNameInput);
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.gameStartButton);
+            this.panel2.Location = new System.Drawing.Point(309, 132);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(222, 224);
+            this.panel2.TabIndex = 11;
             // 
             // PlayersStartControl
             // 
@@ -168,9 +178,10 @@
             this.Name = "PlayersStartControl";
             this.Size = new System.Drawing.Size(826, 521);
             this.MagaAGame.ResumeLayout(false);
-            this.MagaAGame.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -188,5 +199,6 @@
         private System.Windows.Forms.Button gameStartButton;
         private System.Windows.Forms.Panel MagaAGame;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

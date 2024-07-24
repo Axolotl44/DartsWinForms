@@ -38,8 +38,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.GameStartContent = new System.Windows.Forms.Panel();
-            this.GameStartContent.SuspendLayout();
+            this.GameRulesContent = new System.Windows.Forms.Panel();
+            this.GameRulesContent.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -142,33 +142,33 @@
             this.textBox3.Size = new System.Drawing.Size(121, 20);
             this.textBox3.TabIndex = 9;
             // 
-            // GameStartContent
+            // GameRulesContent
             // 
-            this.GameStartContent.Controls.Add(this.label1);
-            this.GameStartContent.Controls.Add(this.button1);
-            this.GameStartContent.Controls.Add(this.textBox3);
-            this.GameStartContent.Controls.Add(this.comboBox1);
-            this.GameStartContent.Controls.Add(this.textBox2);
-            this.GameStartContent.Controls.Add(this.label2);
-            this.GameStartContent.Controls.Add(this.label5);
-            this.GameStartContent.Controls.Add(this.textBox1);
-            this.GameStartContent.Controls.Add(this.label3);
-            this.GameStartContent.Controls.Add(this.label4);
-            this.GameStartContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GameStartContent.Location = new System.Drawing.Point(0, 0);
-            this.GameStartContent.Name = "GameStartContent";
-            this.GameStartContent.Size = new System.Drawing.Size(826, 521);
-            this.GameStartContent.TabIndex = 10;
+            this.GameRulesContent.Controls.Add(this.label1);
+            this.GameRulesContent.Controls.Add(this.button1);
+            this.GameRulesContent.Controls.Add(this.textBox3);
+            this.GameRulesContent.Controls.Add(this.comboBox1);
+            this.GameRulesContent.Controls.Add(this.textBox2);
+            this.GameRulesContent.Controls.Add(this.label2);
+            this.GameRulesContent.Controls.Add(this.label5);
+            this.GameRulesContent.Controls.Add(this.textBox1);
+            this.GameRulesContent.Controls.Add(this.label3);
+            this.GameRulesContent.Controls.Add(this.label4);
+            this.GameRulesContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GameRulesContent.Location = new System.Drawing.Point(0, 0);
+            this.GameRulesContent.Name = "GameRulesContent";
+            this.GameRulesContent.Size = new System.Drawing.Size(826, 521);
+            this.GameRulesContent.TabIndex = 10;
             // 
             // GameRulesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.GameStartContent);
+            this.Controls.Add(this.GameRulesContent);
             this.Name = "GameRulesControl";
             this.Size = new System.Drawing.Size(826, 521);
-            this.GameStartContent.ResumeLayout(false);
-            this.GameStartContent.PerformLayout();
+            this.GameRulesContent.ResumeLayout(false);
+            this.GameRulesContent.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -185,6 +185,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Panel GameStartContent;
+        private System.Windows.Forms.Panel GameRulesContent;
     }
 }

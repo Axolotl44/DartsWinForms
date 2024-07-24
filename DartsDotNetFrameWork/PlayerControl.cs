@@ -25,31 +25,31 @@ namespace DartsDotNetFrameWork
         private string legP;
         private string setP;
         private string outP;
-        public string NameP
+        public string NameLabel
         {
             get { return nameP; }
             set { nameP = value; ControlLabelName.Text = value; }
         }
 
-        public string PointP
+        public string PointLabel
         {
             get { return pointP; }
             set { pointP = value; ControlLabelPoint.Text = value; }
         }
 
-        public string LegP
+        public string LegLabel
         {
             get { return legP; }
             set { legP = value; ControlLabelLeg.Text = value; }
         }
 
-        public string SetP
+        public string SetLabel
         {
             get { return setP; }
             set { setP = value; ControlLabelSet.Text = value; }
         }
 
-        public string OutP
+        public string CheckoutLabel
         {
             get { return outP; }
             set { outP = value; ControlLabelCheckOut.Text = value; }
