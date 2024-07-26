@@ -52,7 +52,9 @@ namespace DartsDotNetFrameWork
                 playerNameInput.Clear();
 
                 label5.Hide();
+                playerNameInput.Hide();
                 gameStartButton.Show();
+                button1.Hide();
             }
         }
 

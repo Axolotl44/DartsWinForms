@@ -38,11 +38,11 @@
             this.playersListBox = new System.Windows.Forms.ListBox();
             this.gameStartButton = new System.Windows.Forms.Button();
             this.MagaAGame = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.MagaAGame.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -61,7 +61,7 @@
             this.setLabel.AutoSize = true;
             this.setLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.setLabel.ForeColor = System.Drawing.Color.Silver;
-            this.setLabel.Location = new System.Drawing.Point(11, 158);
+            this.setLabel.Location = new System.Drawing.Point(15, 139);
             this.setLabel.Name = "setLabel";
             this.setLabel.Size = new System.Drawing.Size(42, 24);
             this.setLabel.TabIndex = 1;
@@ -72,7 +72,7 @@
             this.legLabel.AutoSize = true;
             this.legLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.legLabel.ForeColor = System.Drawing.Color.Silver;
-            this.legLabel.Location = new System.Drawing.Point(11, 108);
+            this.legLabel.Location = new System.Drawing.Point(15, 97);
             this.legLabel.Name = "legLabel";
             this.legLabel.Size = new System.Drawing.Size(47, 24);
             this.legLabel.TabIndex = 2;
@@ -83,7 +83,7 @@
             this.gameTypeLabel.AutoSize = true;
             this.gameTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gameTypeLabel.ForeColor = System.Drawing.Color.Silver;
-            this.gameTypeLabel.Location = new System.Drawing.Point(11, 58);
+            this.gameTypeLabel.Location = new System.Drawing.Point(15, 55);
             this.gameTypeLabel.Name = "gameTypeLabel";
             this.gameTypeLabel.Size = new System.Drawing.Size(53, 24);
             this.gameTypeLabel.TabIndex = 3;
@@ -109,7 +109,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(68, 91);
+            this.button1.Location = new System.Drawing.Point(67, 71);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 31);
             this.button1.TabIndex = 6;
@@ -124,12 +124,12 @@
             this.playersListBox.ItemHeight = 20;
             this.playersListBox.Location = new System.Drawing.Point(562, 132);
             this.playersListBox.Name = "playersListBox";
-            this.playersListBox.Size = new System.Drawing.Size(155, 224);
+            this.playersListBox.Size = new System.Drawing.Size(155, 184);
             this.playersListBox.TabIndex = 7;
             // 
             // gameStartButton
             // 
-            this.gameStartButton.Location = new System.Drawing.Point(26, 148);
+            this.gameStartButton.Location = new System.Drawing.Point(26, 108);
             this.gameStartButton.Name = "gameStartButton";
             this.gameStartButton.Size = new System.Drawing.Size(172, 55);
             this.gameStartButton.TabIndex = 9;
@@ -148,17 +148,6 @@
             this.MagaAGame.Size = new System.Drawing.Size(826, 521);
             this.MagaAGame.TabIndex = 10;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.gameTypeLabel);
-            this.panel1.Controls.Add(this.legLabel);
-            this.panel1.Controls.Add(this.setLabel);
-            this.panel1.Location = new System.Drawing.Point(56, 132);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(222, 224);
-            this.panel1.TabIndex = 10;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label5);
@@ -167,8 +156,19 @@
             this.panel2.Controls.Add(this.gameStartButton);
             this.panel2.Location = new System.Drawing.Point(309, 132);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(222, 224);
+            this.panel2.Size = new System.Drawing.Size(222, 182);
             this.panel2.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.gameTypeLabel);
+            this.panel1.Controls.Add(this.legLabel);
+            this.panel1.Controls.Add(this.setLabel);
+            this.panel1.Location = new System.Drawing.Point(56, 132);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(222, 182);
+            this.panel1.TabIndex = 10;
             // 
             // PlayersStartControl
             // 
@@ -178,10 +178,10 @@
             this.Name = "PlayersStartControl";
             this.Size = new System.Drawing.Size(826, 521);
             this.MagaAGame.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

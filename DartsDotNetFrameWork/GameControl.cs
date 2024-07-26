@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +23,7 @@ namespace DartsDotNetFrameWork
             CurrentRoundLabel.Text = $"{currentSet}.Set {currentLeg}.Leg";
 
             NewGamePanel.Hide();
+            kiszalloPanel.Hide();
         }
 
         PlayerControl[] playerControls;
@@ -173,7 +171,7 @@ namespace DartsDotNetFrameWork
             CheckAll(currentP); //dobás leszámolás után ellenőrzi a leget, setet, wint
         }
 
-        private void CheckAll(int currentP)
+        private async void CheckAll(int currentP)
         {
             if (game.Players[currentP].Point == 0) //Leg win
             {
@@ -186,6 +184,20 @@ namespace DartsDotNetFrameWork
 
                 //controlra való kiírás
                 playerControls[currentP].LegLabel = $"{game.Players[currentP].LegsWon}";
+
+                //Kiszálló dartsok számának számolása; 100 alatt, kivéve 99, lehet csak kevesebb mint 3-al kiszállni
+                if (game.Players[currentP].PointsThrown.Last() < 100 && game.Players[currentP].PointsThrown.Last() != 99)
+                {
+                    kiszalloPanel.Show();
+                    ThrowPanel.Enabled = false;
+
+                    //megkell várni míg megadja mennyiből szállt ki
+                    await buttonPressed.Task;
+
+                    //gombnyomás után létrehoz egy új példányt ugyanazon a változón, így újból működik (vagymi)
+                }
+                //3 dartos kiszállók esetén csak továbbmegyünk
+                //reset előtt menteni kell majd
 
                 //pontok, checkout visszaállítása
                 PointReset();
@@ -206,10 +218,8 @@ namespace DartsDotNetFrameWork
                 //controlra való kiírás
                 playerControls[currentP].SetLabel = $"{game.Players[currentP].SetsWon}";
 
-                //pontok, checkout visszaállítása
-                PointReset();
+                //pontok, checkout visszaállítása //pontok már ezelőtt visszalettek
                 LegReset();
-                CheckoutLabelReset();
 
                 //current round label számolás
                 currentSet++;
@@ -219,6 +229,7 @@ namespace DartsDotNetFrameWork
             {
                 Player gameWinner = game.Players[currentP];
                 MessageBox.Show($"{gameWinner.Name} nyerte a gamet!");
+                gameWinnerLabel.Text = $"{gameWinner.Name} nyert!";
 
                 //GAME RESET/GAME END
                 ThrowPanel.Hide();
@@ -283,7 +294,7 @@ namespace DartsDotNetFrameWork
             NewGamePanel.Hide();       
         }
 
-        private void CheckoutLabelReset() //checkout label visszaállítás
+        private void CheckoutLabelReset() //checkout label eltüntetés
         {
             for (int i = 0; i < game.NumOfPlayers; i++)
             {
@@ -325,13 +336,31 @@ namespace DartsDotNetFrameWork
             Environment.Exit(0);
         }
 
+        //Kiszállók
+        private TaskCompletionSource<bool> buttonPressed = new TaskCompletionSource<bool>();
+        private void outButton_Click(object sender, EventArgs e)
+        {
+            if (sender == outInOneButton)
+            {
+                game.Players[currentPlayer].NumOfThrows -= 2;
 
-        //NOT YET IMPLEMENTED
-        //Átlag számolások, stats class
-        //Stats.Kiszallo(i, game);
-        //Stats.AvgLeg(i, this); 
+            }
+            else if (sender == outInTwoButton)
+            {
+                game.Players[currentPlayer].NumOfThrows -= 1;
 
-        //SaveGame class
+            }
+            //egyéb esetben a sender az outInThreeButton, ahol nemkell levonni
+            
+            //minden esetben kell
+            kiszalloPanel.Hide();
+            ThrowPanel.Enabled = true;
+
+            //gomb meglett nyomva, erre vár a CheckALL
+            buttonPressed.SetResult(true);
+            buttonPressed = new TaskCompletionSource<bool>(); //új task létrehozás, hogy újból lehessen ellenőrizni
+        }
+
 
     }
 }
