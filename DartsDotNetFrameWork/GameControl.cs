@@ -10,11 +10,13 @@ namespace DartsDotNetFrameWork
     public partial class GameControl : UserControl
     {
         private Game game;
-        public GameControl(Game game)
+        private bool saveGame;
+        public GameControl(Game game, bool saveGame)
         {
             InitializeComponent();
 
             this.game = game;
+            this.saveGame = saveGame;
 
             CreatePlayerControls(); //első kiemelését is megcsinálja
 
@@ -81,13 +83,12 @@ namespace DartsDotNetFrameWork
                     textBox1.Clear();
                     return;
                 }
-
+                //helyes bemenet, levonjuk a current playertől
                 textBox1.Clear();
 
-                //valós dobott érték után dob a jelenlegi játékos
                 ThrowExtra(dobottSzam, currentPlayer);
 
-                //miután dobott újraszámoljuk a soron következőt és kiemeljük
+                //dobás után számoljuk a soron következőt és kiemeljük
                 currentPlayer = CurrentPlayerCalc();
                 CurrentPlayerEmphasize(currentPlayer);
             }
@@ -116,7 +117,7 @@ namespace DartsDotNetFrameWork
                 { setStarterPlayer = 0; }
 
                 currentPlayer = setStarterPlayer;
-                return currentPlayer;          
+                return currentPlayer;
             }
             else if (playerWonLeg) //ha player nyert leget, de nem nyert setet
             {
@@ -138,7 +139,7 @@ namespace DartsDotNetFrameWork
                 { currentPlayer = 0; }
 
                 return currentPlayer;
-            } 
+            }
         }
 
         private void ThrowExtra(int pointThrown, int currentP) //valós megadott dobott számra, adott jelenlegi playerre
@@ -163,7 +164,7 @@ namespace DartsDotNetFrameWork
                 }
                 playerControls[currentP].CheckOutPossible(); //megjeleníti a checkoutot
             }
-            
+
             CheckAll(currentP); //dobás leszámolás után ellenőrzi a leget, setet, wint
         }
 
@@ -197,7 +198,13 @@ namespace DartsDotNetFrameWork
                 //MENTÉS HELYE
                 LegEndStats();
 
-                //pontok, checkout visszaállítása
+                if (saveGame) //playersStart checkboxa alapján
+                {
+                    FileHandler.SavePlayer(game.Players[currentP], "playerTeszt");
+                    FileHandler.SaveGame(game, "gameTeszt");
+                }
+
+                //pontok, checkout visszaállítása, előtte kell menteni
                 PointReset();
                 CheckoutLabelReset();
 

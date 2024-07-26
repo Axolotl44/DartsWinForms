@@ -1,0 +1,14 @@
+{
+  "Name": "Balu",
+  "Point": 0,
+  "LegsWon": 1,
+  "SetsWon": 0,
+  "NumOfThrows": 9,
+  "PointsThrown": [
+    180,
+    60,
+    61
+  ],
+  "LegAvg": 99.0,
+  "OneDartAvg": 33.0
+}

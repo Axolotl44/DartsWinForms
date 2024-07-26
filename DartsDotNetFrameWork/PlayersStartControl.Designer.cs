@@ -40,6 +40,7 @@
             this.MagaAGame = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.saveGameCheckBox = new System.Windows.Forms.CheckBox();
             this.MagaAGame.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -161,14 +162,27 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.saveGameCheckBox);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.gameTypeLabel);
             this.panel1.Controls.Add(this.legLabel);
             this.panel1.Controls.Add(this.setLabel);
             this.panel1.Location = new System.Drawing.Point(56, 132);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(222, 182);
+            this.panel1.Size = new System.Drawing.Size(222, 221);
             this.panel1.TabIndex = 10;
+            // 
+            // saveGameCheckBox
+            // 
+            this.saveGameCheckBox.AutoSize = true;
+            this.saveGameCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.saveGameCheckBox.ForeColor = System.Drawing.Color.Silver;
+            this.saveGameCheckBox.Location = new System.Drawing.Point(19, 175);
+            this.saveGameCheckBox.Name = "saveGameCheckBox";
+            this.saveGameCheckBox.Size = new System.Drawing.Size(150, 28);
+            this.saveGameCheckBox.TabIndex = 4;
+            this.saveGameCheckBox.Text = "Játék mentése";
+            this.saveGameCheckBox.UseVisualStyleBackColor = true;
             // 
             // PlayersStartControl
             // 
@@ -200,5 +214,6 @@
         private System.Windows.Forms.Panel MagaAGame;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.CheckBox saveGameCheckBox;
     }
 }

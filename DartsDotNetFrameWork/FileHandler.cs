@@ -11,9 +11,21 @@ namespace DartsDotNetFrameWork
     internal static class FileHandler //TO BE UPDATED
     {
         //Player Save/Load
+        public static void SavePlayer(Player p, string fileName)
+        {
+            string jsonContent = JsonConvert.SerializeObject(p, Formatting.Indented);
+
+            string filePath = $@"..\..\SavedGames\{fileName}.json";
+
+            if (!(File.Exists(filePath)))
+            {
+                File.WriteAllText(filePath, jsonContent);
+            }
+            else { FileAlreadyExists(filePath, jsonContent); }
+        }
         public static Player LoadPlayer(string fileName)
         {
-            string filePath = $@"SavedGames\{fileName}.json";
+            string filePath = $@"..\..\SavedGames\{fileName}.json";
 
             if (File.Exists(filePath))
             {
@@ -26,24 +38,22 @@ namespace DartsDotNetFrameWork
             return null;
         }
 
-        public static void SavePlayer(Player p, string fileName)
+        //Game Save/Load
+        public static void SaveGame(Game g, string fileName)
         {
-            string jsonContent = JsonConvert.SerializeObject(p, Formatting.Indented);
+            string jsonContent = JsonConvert.SerializeObject(g, Formatting.Indented);
 
-            string filePath = $@"SavedGames\{fileName}.json";
+            string filePath = $@"..\..\SavedGames\{fileName}.json";
 
             if (!(File.Exists(filePath)))
             {
                 File.WriteAllText(filePath, jsonContent);
             }
-            else {FileAlreadyExists(filePath, jsonContent); }
+            else { FileAlreadyExists(filePath, jsonContent); }
         }
-
-
-        //Game Save/Load
         public static Game LoadGame(string fileName)
         {
-            string filePath = $@"SavedGames\{fileName}.json";
+            string filePath = $@"..\..\SavedGames\{fileName}.json";
 
             if (File.Exists(filePath))
             {
@@ -54,19 +64,6 @@ namespace DartsDotNetFrameWork
                 return g;
             }
             return null;
-        }
-
-        public static void SaveGame(Game g, string fileName)
-        {
-            string jsonContent = JsonConvert.SerializeObject(g, Formatting.Indented);
-
-            string filePath = $@"SavedGames\{fileName}.json";
-
-            if (!(File.Exists(filePath)))
-            {
-                File.WriteAllText(filePath, jsonContent);
-            }
-            else { FileAlreadyExists(filePath, jsonContent); }
         }
 
 

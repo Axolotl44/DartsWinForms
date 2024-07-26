@@ -62,7 +62,7 @@ namespace DartsDotNetFrameWork
         //button3 = gameStartButton, később ha érdekel átnevezni mindenhol
         private void button3_Click(object sender, EventArgs e)
         {
-            GameControl gameControl = new GameControl(game);
+            GameControl gameControl = new GameControl(game, saveGameCheckBox.Checked);
             MainControl.ShowControl(gameControl, MagaAGame);
         }
 
