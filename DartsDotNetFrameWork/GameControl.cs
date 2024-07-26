@@ -85,8 +85,10 @@ namespace DartsDotNetFrameWork
                 }
                 //helyes bemenet, levonjuk a current playertől
                 textBox1.Clear();
-
                 ThrowExtra(dobottSzam, currentPlayer);
+
+                //async method, ezutánik lefutnak, míg checkout gombnyomásra vár
+                CheckAll(currentPlayer); 
 
                 //dobás után számoljuk a soron következőt és kiemeljük
                 currentPlayer = CurrentPlayerCalc();
@@ -148,7 +150,7 @@ namespace DartsDotNetFrameWork
             game.Players[currentP].PointsThrown.Add(pointThrown); //egybe 3 dobás pontja
             game.Players[currentP].NumOfThrows += 3;
 
-            playerControls[currentP].PointLabel = $"{game.Players[currentPlayer].Point}";
+            playerControls[currentP].PointLabel = $"{game.Players[currentP].Point}";
 
             //ha lehet, checkout lehetőség kiírás
             if (game.Players[currentP].Point <= 170)
@@ -162,10 +164,8 @@ namespace DartsDotNetFrameWork
                     MessageBox.Show("elkúrtam a kiszállókat");
                     return;
                 }
-                playerControls[currentP].CheckOutPossible(); //megjeleníti a checkoutot
+                playerControls[currentP].CheckOutPossible(); //megjeleníti a checkout lehetőség labelt
             }
-
-            CheckAll(currentP); //dobás leszámolás után ellenőrzi a leget, setet, wint
         }
 
         private async void CheckAll(int currentP)
@@ -189,6 +189,9 @@ namespace DartsDotNetFrameWork
                     ThrowPanel.Enabled = false;
 
                     //megkell várni míg megadja mennyiből szállt ki
+                    //CheckAll async, ezért amíg erre vár, addig ThrownNumHandler tovább megy, újraszámol
+                    //ezért külön elkell menteni hogy újraszámolás előtti playerre vonja le a checkoutot
+                    checkoutPlayer = currentP; 
                     await buttonPressed.Task;
 
                     //gombnyomás után létrehoz egy új példányt ugyanazon a változón, így újból működik (vagymi)
@@ -233,6 +236,7 @@ namespace DartsDotNetFrameWork
             if (game.Players[currentP].SetsWon == game.SetToWin) //GAME WIN
             {
                 Player gameWinner = game.Players[currentP];
+                gameWinner.Winner = true;
                 MessageBox.Show($"{gameWinner.Name} nyerte a gamet!");
                 gameWinnerLabel.Text = $"{gameWinner.Name} nyert!";
 
@@ -340,16 +344,17 @@ namespace DartsDotNetFrameWork
 
         //Kiszállók
         private TaskCompletionSource<bool> buttonPressed = new TaskCompletionSource<bool>();
+        private int checkoutPlayer; //azért kell, mert újraszámolódna gombnyomás előtt, így meg ok
         private void outButton_Click(object sender, EventArgs e)
         {
             if (sender == outInOneButton)
             {
-                game.Players[currentPlayer].NumOfThrows -= 2;
+                game.Players[checkoutPlayer].NumOfThrows -= 2;
 
             }
             else if (sender == outInTwoButton)
             {
-                game.Players[currentPlayer].NumOfThrows -= 1;
+                game.Players[checkoutPlayer].NumOfThrows -= 1;
 
             }
             //egyéb esetben a sender az outInThreeButton, ahol nemkell levonni

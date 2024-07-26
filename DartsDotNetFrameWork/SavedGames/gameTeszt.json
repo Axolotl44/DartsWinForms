@@ -5,31 +5,33 @@
   "NumOfPlayers": 2,
   "Players": [
     {
-      "Name": "Balu",
+      "Name": "Ger",
       "Point": 0,
       "LegsWon": 1,
       "SetsWon": 0,
-      "NumOfThrows": 9,
+      "NumOfThrows": 8,
       "PointsThrown": [
         180,
-        60,
-        61
+        30,
+        91
       ],
-      "LegAvg": 99.0,
-      "OneDartAvg": 33.0
+      "LegAvg": 111.0,
+      "OneDartAvg": 37.0,
+      "Winner": false
     },
     {
-      "Name": "Geri",
-      "Point": 151,
+      "Name": "asg",
+      "Point": 241,
       "LegsWon": 0,
       "SetsWon": 0,
-      "NumOfThrows": 5,
+      "NumOfThrows": 6,
       "PointsThrown": [
-        50,
-        100
+        30,
+        30
       ],
-      "LegAvg": 180.0,
-      "OneDartAvg": 30.0
+      "LegAvg": 150.0,
+      "OneDartAvg": 10.0,
+      "Winner": false
     }
   ]
 }
