@@ -10,17 +10,15 @@ namespace DartsDotNetFrameWork
     public partial class GameControl : UserControl
     {
         private Game game;
-
         public GameControl(Game game)
         {
             InitializeComponent();
 
             this.game = game;
 
-            CreatePlayerControls();
-            CurrentPlayerEmphasize(0);
+            CreatePlayerControls(); //első kiemelését is megcsinálja
 
-            CurrentRoundLabel.Text = $"{currentSet}.Set {currentLeg}.Leg";
+            CurrentRoundLabelSetter();
 
             NewGamePanel.Hide();
             kiszalloPanel.Hide();
@@ -42,7 +40,6 @@ namespace DartsDotNetFrameWork
                     LegLabel = "0",
                     SetLabel = "0"
                 };
-
                 flowLayoutPanel1.Controls.Add(playerControls[i]);  
             }
             //első játékos kezd, őt kiemeljük
@@ -56,7 +53,6 @@ namespace DartsDotNetFrameWork
                 ThrownNumHandler();
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             ThrownNumHandler();
@@ -108,7 +104,7 @@ namespace DartsDotNetFrameWork
         bool playerWonSet = false;
         private int CurrentPlayerCalc()
         {
-            //NEM TELJESEN JÓ. ÁTKELL NÉZNI A SET WITN
+            //LEHET, HOGY NEM TELJESEN JÓ. ÁTKELL NÉZNI A SET WINT
             if (playerWonSet) //fordított sorrendben először a set kezdőt kell megnézni
             {
                 playerWonSet = false;
@@ -185,7 +181,7 @@ namespace DartsDotNetFrameWork
                 //controlra való kiírás
                 playerControls[currentP].LegLabel = $"{game.Players[currentP].LegsWon}";
 
-                //Kiszálló dartsok számának számolása; 100 alatt, kivéve 99, lehet csak kevesebb mint 3-al kiszállni
+                //kiszálló dartsok számának számolása; 100 alatt, kivéve 99, lehet csak kevesebb mint 3-al kiszállni
                 if (game.Players[currentP].PointsThrown.Last() < 100 && game.Players[currentP].PointsThrown.Last() != 99)
                 {
                     kiszalloPanel.Show();
@@ -197,7 +193,9 @@ namespace DartsDotNetFrameWork
                     //gombnyomás után létrehoz egy új példányt ugyanazon a változón, így újból működik (vagymi)
                 }
                 //3 dartos kiszállók esetén csak továbbmegyünk
-                //reset előtt menteni kell majd
+
+                //MENTÉS HELYE
+                LegEndStats();
 
                 //pontok, checkout visszaállítása
                 PointReset();
@@ -237,10 +235,11 @@ namespace DartsDotNetFrameWork
                 return;
             }
 
-            CurrentRoundSetter();
+            CurrentRoundLabelSetter();
         }
 
-        private void PointReset() //nyert leg után
+
+        private void PointReset() //nyert leg után visszaállítja a pontokat és labelt
         {
             for (int i = 0; i < game.NumOfPlayers; i++)
             {
@@ -251,8 +250,7 @@ namespace DartsDotNetFrameWork
                 playerControls[i].PointLabel = $"{game.PointsToLeg}";
             }
         }
-
-        private void LegReset() //nyert set után, csak a nyert legeket állítja vissza
+        private void LegReset() //csak a legeket állítja vissza
         {
             for (int i = 0; i < game.NumOfPlayers; i++)
             {
@@ -261,7 +259,6 @@ namespace DartsDotNetFrameWork
                 playerControls[i].LegLabel = "0";
             }
         }
-
         private void SetReset() //csak a seteket állítja vissza
         {
             for (int i = 0; i < game.NumOfPlayers; i++)
@@ -271,7 +268,6 @@ namespace DartsDotNetFrameWork
                 playerControls[i].SetLabel = "0";
             }
         }
-
         private void GameReset() //mindent resetel, biztosabb így
         {
             currentPlayer = 0;
@@ -288,12 +284,11 @@ namespace DartsDotNetFrameWork
             CurrentPlayerEmphasize(0);
             currentLeg = 1;
             currentSet = 1;
-            CurrentRoundSetter();
+            CurrentRoundLabelSetter();
 
             ThrowPanel.Show();
             NewGamePanel.Hide();       
         }
-
         private void CheckoutLabelReset() //checkout label eltüntetés
         {
             for (int i = 0; i < game.NumOfPlayers; i++)
@@ -317,13 +312,13 @@ namespace DartsDotNetFrameWork
                 }
             }
         }
-
         int currentLeg = 1;
         int currentSet = 1;
-        private void CurrentRoundSetter()
+        private void CurrentRoundLabelSetter()
         {
             CurrentRoundLabel.Text = $"{currentSet}.Set {currentLeg}.Leg";
         }
+
 
         //game end gombok
         private void button2_Click(object sender, EventArgs e) //IGEN ÚJ GAME
@@ -361,6 +356,12 @@ namespace DartsDotNetFrameWork
             buttonPressed = new TaskCompletionSource<bool>(); //új task létrehozás, hogy újból lehessen ellenőrizni
         }
 
+        private void LegEndStats()
+        {
+            //bemenetként kell a leg winner, aki a current player, mert utána hívódik meg ez
+            Stats.LegAvg(game.Players[currentPlayer], game);
+            Stats.OneDartAvg(game);
+        }
 
     }
 }

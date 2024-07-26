@@ -13,29 +13,35 @@ namespace DartsDotNetFrameWork
         ////(501 – point Left) / Darts Thrown x 3: kör végén a loseolt
         ////(point / Darts Thrown) 1-dart average
 
-        //public static void AvgLeg(int player, Game g) //1 leg átlaga
-        //{
-        //    Player p = g.Players[player];
+        //palyer legAvgba-ba ment 
+        public static void LegAvg(Player legWinner, Game g) //1 leg átlaga mindenkinek
+        {
+            double avg;
+            for (int i = 0; i < g.NumOfPlayers; i++)
+            {
+                if (g.Players[i] == legWinner) //winner átlaga
+                {
+                    avg = (g.PointsToLeg / legWinner.NumOfThrows) * 3;
+                    g.Players[i].LegAvg = Math.Round(avg, 2);
 
-        //    if (p.Point == 0) //winner átlaga
-        //    {
-        //        double avgWin = (g.PointsToLeg / p.NumOfThrows) * 3;
-        //        Console.WriteLine($"\n{p.Name} átlag dobása: {Math.Round(avgWin, 2)}");
-        //    }
-        //    else //loser átlaga, egyelőre unused. A game logic miatt, csak a winner hívja meg
-        //    {
-        //        double avgLose = (g.PointsToLeg - p.Point) / p.NumOfThrows * 3;
-        //        Console.WriteLine($"\n{p.Name} átlag dobása: {Math.Round(avgLose, 2)}");
-        //    }
-        //}
+                }
+                else //többiek átlaga
+                {
+                    avg = (g.PointsToLeg - g.Players[i].Point) / g.Players[i].NumOfThrows * 3;
+                    g.Players[i].LegAvg = Math.Round(avg, 2);
+                }
+            }
+        }
 
-        //public static void OneDartAvg(int player, Game g)
-        //{
-        //    Player p = g.Players[player];
-
-        //    double avgOne = (g.PointsToLeg - p.Point) / p.NumOfThrows;
-        //    Console.WriteLine($"\n{p.Name} 1-dart átlaga: {Math.Round(avgOne),2}");
-        //}
+        //player oneDartAvg-ba ment
+        public static void OneDartAvg(Game g)
+        {
+            for (int i = 0; i < g.NumOfPlayers;i++)
+            {
+                double oneAvg = (g.PointsToLeg - g.Players[i].Point) / g.Players[i].NumOfThrows;
+                g.Players[i].OneDartAvg = Math.Round(oneAvg, 2);
+            }
+        }
 
 
     }

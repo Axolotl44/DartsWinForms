@@ -14,6 +14,10 @@ namespace DartsDotNetFrameWork
         private int setsWon;
         private int numOfThrows;
         private List<int> pointsThrown;
+        //stats
+        private List<double> stats;
+        private double legAvg;
+        private double oneDartAvg;
 
         public string Name 
         {
@@ -43,6 +47,17 @@ namespace DartsDotNetFrameWork
         {
             get { return pointsThrown; }
         }
+        //stats
+        public double LegAvg
+        {
+            get { return legAvg; }
+            set { legAvg = value; }
+        }
+        public double OneDartAvg
+        {
+            get { return oneDartAvg; }
+            set { oneDartAvg = value; }
+        }
 
         public Player(string name, Game g)
         {
@@ -52,6 +67,9 @@ namespace DartsDotNetFrameWork
             setsWon = 0;
             numOfThrows = 0;
             pointsThrown = new List<int>();
+            //stats
+            legAvg = 0;
+            oneDartAvg = 0;
         }
 
         //[JsonConstructor]
