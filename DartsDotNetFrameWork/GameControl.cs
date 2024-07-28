@@ -14,7 +14,7 @@ namespace DartsDotNetFrameWork
         public GameControl(Game game, bool saveGame)
         {
             InitializeComponent();
-
+           
             this.game = game;
             this.saveGame = saveGame;
 
@@ -24,6 +24,8 @@ namespace DartsDotNetFrameWork
 
             NewGamePanel.Hide();
             kiszalloPanel.Hide();
+
+            this.ActiveControl = textBox1;
         }
 
         PlayerControl[] playerControls;

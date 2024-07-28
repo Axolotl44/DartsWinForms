@@ -107,6 +107,7 @@
             this.playerNameInput.Name = "playerNameInput";
             this.playerNameInput.Size = new System.Drawing.Size(172, 20);
             this.playerNameInput.TabIndex = 5;
+            this.playerNameInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.playerNameInput_KeyDown);
             // 
             // button1
             // 

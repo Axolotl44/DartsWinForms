@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace DartsDotNetFrameWork
 {
@@ -76,16 +77,16 @@ namespace DartsDotNetFrameWork
             pointsThrown = new List<int>();
         }
 
-        //[JsonConstructor]
-        //public Player(string name)
-        //{
-        //    this.name = name;
-        //    point = 0;
-        //    legsWon = 0;
-        //    setsWon = 0;
-        //    numOfThrows = 0;
-        //    pointsThrown = new List<int>();
-        //}
+        [JsonConstructor]
+        public Player(string name)
+        {
+            this.name = name;
+            point = 0;
+            legsWon = 0;
+            setsWon = 0;
+            numOfThrows = 0;
+            pointsThrown = new List<int>();
+        }
 
     }
 }

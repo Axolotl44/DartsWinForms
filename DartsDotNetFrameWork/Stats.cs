@@ -13,7 +13,6 @@ namespace DartsDotNetFrameWork
         ////(501 – point Left) / Darts Thrown x 3: kör végén a loseolt
         ////(point / Darts Thrown) 1-dart average
 
-        //palyernél legAvgba 
         public static void LegAvg(Player legWinner, Game g) //1 leg átlaga mindenkinek
         {
             double avg;
@@ -33,7 +32,6 @@ namespace DartsDotNetFrameWork
             }
         }
 
-        //playernél oneDartAvg
         public static void OneDartAvg(Game g)
         {
             for (int i = 0; i < g.NumOfPlayers;i++)
@@ -42,6 +40,9 @@ namespace DartsDotNetFrameWork
                 g.Players[i].OneDartAvg = Math.Round(oneAvg, 3);
             }
         }
+
+
+
 
 
     }

@@ -21,8 +21,60 @@ namespace DartsDotNetFrameWork
         {
             InitializeComponent();
         }
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textBox1.Focus();
+            }
+        }
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Down)
+            {
+                textBox2.Focus();
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                comboBox1.Focus();
+            }
+        }
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Down)
+            {   
+                textBox3.Focus();
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                textBox1.Focus();
+            }
+        }
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Down)
+            {
+                button1.Focus();
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                textBox2.Focus();
+            }
+        }
+        private void button1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                CheckRules();
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            CheckRules();
+        }
+
+        private void CheckRules()
         {
             //van-e érték beírva mindenhova check
             if (comboBox1.Text == "" || textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
@@ -41,9 +93,8 @@ namespace DartsDotNetFrameWork
             else
             {
                 MessageBox.Show("Valós adatot adj meg");
-            }   
+            }
         }
-
 
 
     }

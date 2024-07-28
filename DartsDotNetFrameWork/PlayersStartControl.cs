@@ -17,23 +17,37 @@ namespace DartsDotNetFrameWork
         public PlayersStartControl(int gameType, int leg, int set, int numOfPlayers)
         {
             InitializeComponent();
-
+      
             gameStartButton.Hide();
-
+           
             gameTypeLabel.Text += $" {gameType}";
             legLabel.Text += $" {leg}";
             setLabel.Text += $" {set}";
             label5.Text = $"{counter}.játékos neve:";
 
             game = new Game(gameType, leg, set, numOfPlayers);
+
+            this.ActiveControl = playerNameInput;
+        }
+      
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MakePlayer();
+        }
+        private void playerNameInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                MakePlayer();
+            }
         }
 
         //régi consoleos playersStart method megvalósítása (lefutás után updatelődik a label)
-        private void button1_Click(object sender, EventArgs e)
+        private void MakePlayer()
         {
             Player tmp;
             ++counter;
-            if(counter <= game.NumOfPlayers)
+            if (counter <= game.NumOfPlayers)
             {
                 label5.Text = $"{counter}.játékos neve:";
 
@@ -43,7 +57,7 @@ namespace DartsDotNetFrameWork
                 playersListBox.Items.Add($"{counter - 1}. {tmp.Name}");
                 playerNameInput.Clear();
             }
-            else if(counter == game.NumOfPlayers + 1)
+            else if (counter == game.NumOfPlayers + 1)
             {
                 tmp = new Player(playerNameInput.Text, game);
                 game.Players.Add(tmp);
@@ -65,6 +79,7 @@ namespace DartsDotNetFrameWork
             GameControl gameControl = new GameControl(game, saveGameCheckBox.Checked);
             MainControl.ShowControl(gameControl, MagaAGame);
         }
+
 
     }
 }
