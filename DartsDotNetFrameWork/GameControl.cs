@@ -238,7 +238,8 @@ namespace DartsDotNetFrameWork
             if (game.Players[currentP].SetsWon == game.SetToWin) //GAME WIN
             {
                 Player gameWinner = game.Players[currentP];
-                gameWinner.Winner = true;
+                gameWinner.Stats.Add("winner", 1);
+
                 MessageBox.Show($"{gameWinner.Name} nyerte a gamet!");
                 gameWinnerLabel.Text = $"{gameWinner.Name} nyert!";
 
@@ -346,7 +347,7 @@ namespace DartsDotNetFrameWork
 
         //Kiszállók
         private TaskCompletionSource<bool> buttonPressed = new TaskCompletionSource<bool>();
-        private int checkoutPlayer; //azért kell, mert újraszámolódna gombnyomás előtt, így meg ok
+        private int checkoutPlayer; //azért kell, mert async miatt újraszámolódna gombnyomás előtt, így meg ok
         private void outButton_Click(object sender, EventArgs e)
         {
             if (sender == outInOneButton)

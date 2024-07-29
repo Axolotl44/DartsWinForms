@@ -66,7 +66,7 @@ namespace DartsDotNetFrameWork
             return null;
         }
 
-
+        //nemkell, ehelyett szokásos file mentési ablakot kell implementálni a formba
         private static void FileAlreadyExists(string path, string content)
         {
             //Console.WriteLine("\nMár létezik ilyen file\n1. felülírás\n2. mentés másként\n3. kilépés mentés nélkül\n1/2/3?");

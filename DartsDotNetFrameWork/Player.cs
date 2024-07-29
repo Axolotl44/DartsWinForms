@@ -15,11 +15,8 @@ namespace DartsDotNetFrameWork
         private int setsWon;
         private int numOfThrows;
         private List<int> pointsThrown;
-        //stats
-        private List<double> stats;
-        private double legAvg;
-        private double oneDartAvg;
-        private bool winner;
+        private Dictionary<string, double> stats;
+        //private bool winner; nem feltétlen kell, mehet esetleg statsba {"winner", 1/0}
 
         public string Name 
         {
@@ -49,22 +46,11 @@ namespace DartsDotNetFrameWork
         {
             get { return pointsThrown; }
         }
-        //stats
-        public double LegAvg
-        {
-            get { return legAvg; }
-            set { legAvg = value; }
-        }
-        public double OneDartAvg
-        {
-            get { return oneDartAvg; }
-            set { oneDartAvg = value; }
-        }
 
-        public bool Winner
+        public Dictionary<string, double> Stats
         {
-            get { return winner; }
-            set { value = winner; }
+            get { return stats; }
+            set { stats = value; }
         }
 
         public Player(string name, Game g)
@@ -75,6 +61,13 @@ namespace DartsDotNetFrameWork
             setsWon = 0;
             numOfThrows = 0;
             pointsThrown = new List<int>();
+            stats = new Dictionary<string, double>()
+            {
+                {"legAvg", 0 },
+                {"oneDartAvg", 0 },
+                {"180", 0 },
+                {"egyéb", 0 }
+            };
         }
 
         [JsonConstructor]
@@ -86,6 +79,13 @@ namespace DartsDotNetFrameWork
             setsWon = 0;
             numOfThrows = 0;
             pointsThrown = new List<int>();
+            stats = new Dictionary<string, double>()
+            {
+                {"legAvg", 0 },
+                {"oneDartAvg", 0 },
+                {"180", 0 },
+                {"egyéb", 0 }
+            };
         }
 
     }

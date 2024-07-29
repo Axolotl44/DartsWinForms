@@ -3,13 +3,15 @@
   "Point": 0,
   "LegsWon": 1,
   "SetsWon": 0,
-  "NumOfThrows": 8,
+  "NumOfThrows": 5,
   "PointsThrown": [
     180,
-    30,
-    91
+    21
   ],
-  "LegAvg": 111.0,
-  "OneDartAvg": 37.0,
-  "Winner": false
+  "Stats": {
+    "legAvg": 120.0,
+    "oneDartAvg": 40.0,
+    "180": 0.0,
+    "egyéb": 0.0
+  }
 }
