@@ -1,22 +1,22 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DartsDotNetFrameWork
 {
     public partial class GameControl : UserControl
     {
         private Game game;
-        private bool saveGame;
-        public GameControl(Game game, bool saveGame)
+        public GameControl(Game game)
         {
             InitializeComponent();
            
             this.game = game;
-            this.saveGame = saveGame;
 
             CreatePlayerControls(); //első kiemelését is megcsinálja
 
@@ -203,11 +203,11 @@ namespace DartsDotNetFrameWork
                 //MENTÉS HELYE
                 LegEndStats();
 
-                if (saveGame) //playersStart checkboxa alapján
-                {
-                    FileHandler.SavePlayer(game.Players[currentP], "playerTeszt");
-                    FileHandler.SaveGame(game, "gameTeszt");
-                }
+                //game közben temporary menteni kell az adatokat, a végén van lehetőség fileba menteni
+                //később game közben is lehet majd menteni, majd onnan folytatni
+                //FileHandler.SavePlayer(game.Players[currentP], "playerTeszt");
+                //FileHandler.SaveGame(game, "gameTeszt");
+
 
                 //pontok, checkout visszaállítása, előtte kell menteni
                 PointReset();
@@ -377,6 +377,17 @@ namespace DartsDotNetFrameWork
             Stats.LegAvg(game.Players[currentPlayer], game);
             Stats.OneDartAvg(game);
         }
+
+        //game mentés
+        private void saveGameButton_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+            string path = saveFileDialog1.FileName;
+            string jsonContent = JsonConvert.SerializeObject(game, Formatting.Indented);
+            File.WriteAllText(path, jsonContent);
+        }
+
+
 
     }
 }

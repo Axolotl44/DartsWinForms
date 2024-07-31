@@ -32,6 +32,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.MainContent = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.MainContent.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +80,11 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "DARTS";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Json file |*.json";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,6 +106,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel MainContent;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

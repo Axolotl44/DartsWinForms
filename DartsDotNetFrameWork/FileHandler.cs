@@ -8,67 +8,66 @@ using Newtonsoft.Json;
 
 namespace DartsDotNetFrameWork
 {
-    internal static class FileHandler //TO BE UPDATED
+    internal static class FileHandler //NOT USED ANYMORE
     {
         //Player Save/Load
-        public static void SavePlayer(Player p, string fileName)
-        {
-            string jsonContent = JsonConvert.SerializeObject(p, Formatting.Indented);
+        //public static void SavePlayer(Player p, string fileName)
+        //{
+        //    string jsonContent = JsonConvert.SerializeObject(p, Formatting.Indented);
 
-            string filePath = $@"..\..\SavedGames\{fileName}.json";
+        //    string filePath = $@"..\..\SavedGames\{fileName}.json";
 
-            if (!(File.Exists(filePath)))
-            {
-                File.WriteAllText(filePath, jsonContent);
-            }
-            else { FileAlreadyExists(filePath, jsonContent); }
-        }
-        public static Player LoadPlayer(string fileName)
-        {
-            string filePath = $@"..\..\SavedGames\{fileName}.json";
+        //    if (!(File.Exists(filePath)))
+        //    {
+        //        File.WriteAllText(filePath, jsonContent);
+        //    }
+        //    else { FileAlreadyExists(filePath, jsonContent); }
+        //}
+        //public static Player LoadPlayer(string fileName)
+        //{
+        //    string filePath = $@"..\..\SavedGames\{fileName}.json";
 
-            if (File.Exists(filePath))
-            {
-                string allText = File.ReadAllText(filePath);
+        //    if (File.Exists(filePath))
+        //    {
+        //        string allText = File.ReadAllText(filePath);
 
-                Player p = JsonConvert.DeserializeObject<Player>(allText);
+        //        Player p = JsonConvert.DeserializeObject<Player>(allText);
 
-                return p;
-            }
-            return null;
-        }
+        //        return p;
+        //    }
+        //    return null;
+        //}
 
-        //Game Save/Load
-        public static void SaveGame(Game g, string fileName)
-        {
-            string jsonContent = JsonConvert.SerializeObject(g, Formatting.Indented);
+        ////Game Save/Load
+        //public static void SaveGame(Game g, string fileName)
+        //{
+        //    string jsonContent = JsonConvert.SerializeObject(g, Formatting.Indented);
 
-            string filePath = $@"..\..\SavedGames\{fileName}.json";
+        //    string filePath = $@"..\..\SavedGames\{fileName}.json";
 
-            if (!(File.Exists(filePath)))
-            {
-                File.WriteAllText(filePath, jsonContent);
-            }
-            else { FileAlreadyExists(filePath, jsonContent); }
-        }
-        public static Game LoadGame(string fileName)
-        {
-            string filePath = $@"..\..\SavedGames\{fileName}.json";
+        //    if (!(File.Exists(filePath)))
+        //    {
+        //        File.WriteAllText(filePath, jsonContent);
+        //    }
+        //    else { FileAlreadyExists(filePath, jsonContent); }
+        //}
+        //public static Game LoadGame(string fileName)
+        //{
+        //    string filePath = $@"..\..\SavedGames\{fileName}.json";
 
-            if (File.Exists(filePath))
-            {
-                string allText = File.ReadAllText(filePath);
+        //    if (File.Exists(filePath))
+        //    {
+        //        string allText = File.ReadAllText(filePath);
 
-                Game g = JsonConvert.DeserializeObject<Game>(allText);
+        //        Game g = JsonConvert.DeserializeObject<Game>(allText);
 
-                return g;
-            }
-            return null;
-        }
+        //        return g;
+        //    }
+        //    return null;
+        //}
 
-        //nemkell, ehelyett szokásos file mentési ablakot kell implementálni a formba
-        private static void FileAlreadyExists(string path, string content)
-        {
+        //private static void FileAlreadyExists(string path, string content)
+        //{
             //Console.WriteLine("\nMár létezik ilyen file\n1. felülírás\n2. mentés másként\n3. kilépés mentés nélkül\n1/2/3?");
             //string option = Console.ReadLine();
             //switch (option)
@@ -97,7 +96,7 @@ namespace DartsDotNetFrameWork
             //        FileAlreadyExists(path, content);
             //        break;
             //}
-        }
+        //}
 
 
 

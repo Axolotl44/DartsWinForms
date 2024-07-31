@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +31,19 @@ namespace DartsDotNetFrameWork
             this.numOfPlayers = numOfPlayers;
             players = new List<Player>();
         }
+
+        //DO NEXT
+        //[JsonConstructor]
+        //public Game(int pointsToLeg, int legToSet, int setToWin, int numOfPlayers)
+        //{
+        //    this.pointsToLeg = pointsToLeg;
+        //    this.legToSet = legToSet;
+        //    this.setToWin = setToWin;
+        //    this.numOfPlayers = numOfPlayers;
+        //    players = new List<Player>();
+        //}
+
+
 
     }
 }

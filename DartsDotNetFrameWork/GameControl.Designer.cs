@@ -38,6 +38,7 @@
             this.YesNewGame = new System.Windows.Forms.Button();
             this.NoNewGame = new System.Windows.Forms.Button();
             this.NewGamePanel = new System.Windows.Forms.Panel();
+            this.saveGameButton = new System.Windows.Forms.Button();
             this.gameWinnerLabel = new System.Windows.Forms.Label();
             this.ThrowPanel = new System.Windows.Forms.Panel();
             this.kiszalloPanel = new System.Windows.Forms.Panel();
@@ -45,6 +46,7 @@
             this.outInTwoButton = new System.Windows.Forms.Button();
             this.outInOneButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.NewGamePanel.SuspendLayout();
             this.ThrowPanel.SuspendLayout();
             this.kiszalloPanel.SuspendLayout();
@@ -148,14 +150,25 @@
             // 
             // NewGamePanel
             // 
+            this.NewGamePanel.Controls.Add(this.saveGameButton);
             this.NewGamePanel.Controls.Add(this.gameWinnerLabel);
             this.NewGamePanel.Controls.Add(this.label2);
             this.NewGamePanel.Controls.Add(this.NoNewGame);
             this.NewGamePanel.Controls.Add(this.YesNewGame);
             this.NewGamePanel.Location = new System.Drawing.Point(16, 323);
             this.NewGamePanel.Name = "NewGamePanel";
-            this.NewGamePanel.Size = new System.Drawing.Size(191, 153);
+            this.NewGamePanel.Size = new System.Drawing.Size(191, 187);
             this.NewGamePanel.TabIndex = 9;
+            // 
+            // saveGameButton
+            // 
+            this.saveGameButton.Location = new System.Drawing.Point(51, 152);
+            this.saveGameButton.Name = "saveGameButton";
+            this.saveGameButton.Size = new System.Drawing.Size(94, 23);
+            this.saveGameButton.TabIndex = 10;
+            this.saveGameButton.Text = "Játék mentése";
+            this.saveGameButton.UseVisualStyleBackColor = true;
+            this.saveGameButton.Click += new System.EventHandler(this.saveGameButton_Click);
             // 
             // gameWinnerLabel
             // 
@@ -229,6 +242,10 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Kiszállás:";
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Json file |*.json | All files |*.*";
+            // 
             // GameControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,5 +288,7 @@
         private System.Windows.Forms.Button outInOneButton;
         private System.Windows.Forms.Button outInTwoButton;
         private System.Windows.Forms.Button outInThreeButton;
+        private System.Windows.Forms.Button saveGameButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

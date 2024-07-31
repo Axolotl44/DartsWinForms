@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace DartsDotNetFrameWork
 {
@@ -26,8 +28,22 @@ namespace DartsDotNetFrameWork
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Még nem elérhető");
+            DialogResult res = openFileDialog1.ShowDialog();
+            
+            if( res == DialogResult.OK)
+            {
+                string file = openFileDialog1.FileName;
+                string data = File.ReadAllText(file);
+
+                //filterelve van, csak json filet tud olvasni, DE később kell check, hogy game szempontból értelmezhető-e a file
+                Game game = JsonConvert.DeserializeObject<Game>(data);
+
+                GameControl gameControl = new GameControl(game);
+                MainControl.ShowControl(gameControl, MainContent);
+            }  
         }
+
+
 
     }
 }

@@ -1,0 +1,36 @@
+{
+  "PointsToLeg": 201,
+  "LegToSet": 1,
+  "SetToWin": 1,
+  "NumOfPlayers": 2,
+  "Players": [
+    {
+      "Name": "Geri",
+      "Point": 201,
+      "LegsWon": 0,
+      "SetsWon": 0,
+      "NumOfThrows": 0,
+      "PointsThrown": [],
+      "Stats": {
+        "legAvg": 0.0,
+        "oneDartAvg": 0.0,
+        "180": 0.0,
+        "egyéb": 0.0
+      }
+    },
+    {
+      "Name": "Balu",
+      "Point": 201,
+      "LegsWon": 0,
+      "SetsWon": 0,
+      "NumOfThrows": 0,
+      "PointsThrown": [],
+      "Stats": {
+        "legAvg": 0.0,
+        "oneDartAvg": 0.0,
+        "180": 0.0,
+        "egyéb": 0.0
+      }
+    }
+  ]
+}
